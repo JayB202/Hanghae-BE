@@ -46,7 +46,7 @@ public class PartyController {
 	 */
 	@PostMapping("/party/new-party")
 	public ResponseEntity<ResponseDto> createParty(@RequestBody PartyRequestDto partyRequestDto, @AuthenticationPrincipal UserDetailsImplement userDetails) {
-		return partyService.creatParty(partyRequestDto, userDetails.getMember());
+		return partyService.createParty(partyRequestDto, userDetails.getMember());
 	}
 
 	/**

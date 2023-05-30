@@ -65,7 +65,7 @@ public class PartyService {
 	 * @return 모임 생성 유무
 	 */
 	@Transactional
-	public ResponseEntity<ResponseDto> creatParty(PartyRequestDto partyRequestDto, Member member) {
+	public ResponseEntity<ResponseDto> createParty(PartyRequestDto partyRequestDto, Member member) {
 
 		Party party = new Party(partyRequestDto, member.getMemberName());
 		//모임만들때 채팅룸 생성

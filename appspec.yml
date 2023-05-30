@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+
+- source: /
+  destination: /home/ubuntu/github-action-alcoholcommunity
+permissions:
+
+- object: /home/ubuntu/github-action-alcoholcommunity/
+  owner: ubuntu
+  group: ubuntu
+hooks:
+  AfterInstall:
+  - location: scripts/deploy.sh

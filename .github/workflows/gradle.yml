@@ -11,13 +11,13 @@ on:
   push:
     branches: [ "develop" ]
   pull_request:
-    branches: [ "**:develop" ]
+    branches: [ "develop" ]
 
 env:
   PROJECT_NAME: alcoholcommunity
-  BUCKET_NAME: walkingpuppy7
+  BUCKET_NAME: sparta7-soolo
   CODE_DEPLOY_APP_NAME: githubaction-soolo
-  DEPLOYMENT_GROUP_NAME: soolo-group
+  DEPLOYMENT_GROUP_NAME: githubaction-soolo
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
       
     - name: Set YML
       run: |
-        echo "${{secrets.APPLICATION_SECRET_KEY}}" | base64 --decode > src/main/resources/application-secret.yml
+        echo "${{secrets.APPLICATION_SECRET_KEY}}" | base64 --decode > src/main/resources/application-aws.yml
         find src
         
     # Build
@@ -63,4 +63,3 @@ jobs:
      # Deploy
     - name: Code Deploy
       run: aws deploy create-deployment --application-name $CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOYMENT_GROUP_NAME --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
-
