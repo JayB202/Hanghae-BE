@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "JayB202-patch-1" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "JayB202-patch-1" ]
 
 env:
   PROJECT_NAME: alcoholcommunity
@@ -35,11 +35,10 @@ jobs:
     - name: Add permission
       run: chmod +x ./gradlew
       shell: bash
-      
-    - name: Set YML
-      run: |
-        echo "${{secrets.APPLICATION_SECRET_KEY}}" | base64 --decode > src/main/resources/application-aws.yml
-        find src
+    - uses: actions/checkout@v2
+    - run: touch ./src/main/resources/application.properties
+    - run: echo "${{secrets.APPLICATION_SECRET}}" >> ./src/main/resources/application.properties
+    - run: cat ./src/main/resources/application.properties
         
     # Build
     - name: Build with Gradle
